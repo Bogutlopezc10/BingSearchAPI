@@ -13,13 +13,15 @@ const BingSearch = (): JSX.Element => {
     const [results, setResults] = useState<BingSearchResult[]>([]);
     const maxResults = 10; // Define the maximum number of results you want to retrieve
     const retryDelay = 1000; // 1 second
+    const apiEndPoint = process.env.REACT_APP_BING_SEARCH_API_ENDPOINT ?? 'default_api_endpoint';
+    const apiKey = process.env.REACT_APP_BING_SEARCH_API_KEY ?? 'default_api_key';
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<any>('https://api.bing.microsoft.com/v7.0/search', {
+                const response = await axios.get<any>(apiEndPoint, {
                     headers: {
-                        'Ocp-Apim-Subscription-Key': '934eb53594e54b9c945aabdf02b0d53c'
+                        'Ocp-Apim-Subscription-Key': apiKey
                     },
                     params: {
                         q: query,
@@ -39,7 +41,7 @@ const BingSearch = (): JSX.Element => {
         if (query !== '') {
             fetchData();
         }
-    }, [query]);
+    }, [query, apiKey, apiEndPoint]);
 
     return (
         <>
