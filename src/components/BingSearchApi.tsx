@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
+import SearchInput from './SearchInput';
+import SearchResults from './SearchResults';
 
 interface BingSearchResult {
     name: string;
@@ -40,20 +42,10 @@ const BingSearch = (): JSX.Element => {
     }, [query]);
 
     return (
-        <div>
-            <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-            />
-            <ul>
-                {results.map((result, index) => (
-                    <li key={index}>
-                        <a href={result.url}>{result.name}</a>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <>
+            <SearchInput onSearch={setQuery}/>
+            <SearchResults results={results}/>
+        </>
     );
 };
 
