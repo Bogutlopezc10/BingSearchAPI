@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
 import SearchInput from './SearchInput';
 import SearchResults from './SearchResults';
@@ -29,7 +29,7 @@ const BingSearch = (): JSX.Element => {
                     }
                 });
                 setResults(response.data?.webPages?.value || []);
-            } catch (error: any) { // Explicitly cast error to any type
+            } catch (error: any) { 
                 console.error('Error fetching data:', error);
                 if ((error as AxiosError)?.response?.status === 429) { // Use type assertion
                     // Retry after delay if rate limit exceeded

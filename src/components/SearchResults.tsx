@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface SearchResult {
   name: string;
   url: string;
